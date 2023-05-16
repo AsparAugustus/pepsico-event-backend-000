@@ -60,7 +60,7 @@ class ProductsFeedback(Base):
     __tablename__ = 'products_feedback'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String, nullable=False, unique=True)
+    name = Column(String, nullable=False, unique=False)
     product_category = Column(String, nullable=False)
     product_name = Column(String, nullable=False, unique=False)
     what_do_you_like_best = Column(String, nullable=False)
