@@ -62,7 +62,7 @@ class ProductsFeedback(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String, nullable=False, unique=True)
     product_category = Column(String, nullable=False)
-    product_name = Column(String, nullable=False, unique=True)
+    product_name = Column(String, nullable=False, unique=False)
     what_do_you_like_best = Column(String, nullable=False)
     unique = Column(String, nullable=False)
 
@@ -126,6 +126,9 @@ def get_exit_survey():
 @app.route('/exit_survey', methods=['POST'])
 def post_exit_survey():
     try:
+
+        Base.metadata.create_all(engine2)  # Create the table if it doesn't exist
+
         data = request.json
         session2 = Session2()
         exit_survey = ExitSurvey(stars=data['stars'], initiative=data['initiative'], further_improvement=data['further_improvement'], feedback=data['feedback'])
@@ -149,6 +152,8 @@ def post_selection_post():
     print("data", data)
 
     try:
+
+        Base.metadata.create_all(engine3)  # Create the table if it doesn't exist
         session3 = Session3()
         
         name = data['name']
